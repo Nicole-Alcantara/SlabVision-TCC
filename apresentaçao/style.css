@@ -1,0 +1,246 @@
+/* Importação de fontes estilizadas */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Quicksand:wght@400;500;600&display=swap');
+
+/* Cores da logo refinadas */
+:root {
+  --azul: #002C5F;
+  --laranja: #F47C00;
+  --branco: #ffffff;
+  --cinza-claro: #f0f0f5;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+  background-color: var(--azul);
+  color: var(--branco);
+  scroll-behavior: smooth;
+}
+
+.apresentacao-body {
+  background-color: var(--azul);
+}
+
+.header {
+  background-color: var(--branco);
+  color: var(--azul);
+  padding: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-bottom: 4px solid var(--laranja);
+  height: 250px; 
+  display: flex;
+  align-items: center;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 30px;
+  height: 100%;
+}
+
+.logo {
+  height: 150%;       
+  width: auto;
+  max-height: 900px;  
+  object-fit: contain;
+  animation: fadeIn 2.0s ease-in-out;
+}
+
+.texto-header {
+  text-align: right;
+  flex: 1;
+  padding-left: 40px;
+}
+
+h1 {
+  margin: 10px 0 5px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--azul);
+  font-family: 'Poppins', sans-serif;
+}
+
+.sub {
+  font-size: 1.1rem;
+  color: #444;
+  opacity: 0.85;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.content {
+  max-width: 1050px;
+  margin: 50px auto;
+  padding: 40px;
+  background-color: var(--branco);
+  color: var(--azul);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  animation: fadeIn 1.2s ease;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+h2 {
+  color: var(--laranja);
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+}
+
+p, li {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  font-family: 'Quicksand', sans-serif;
+}
+
+ul {
+  padding-left: 20px;
+  list-style-type: square;
+  color: #333;
+}
+
+.btn {
+  background-color: var(--laranja);
+  color: white;
+  padding: 14px 30px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  animation: pulse 2s infinite;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn:hover {
+  background-color: #cc6600;
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.botao-container {
+  text-align: center;
+  margin-top: 40px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+.animate-fade {
+  animation: fadeIn 1s ease forwards;
+}
+
+.animate-up {
+  animation: slideUp 1s ease forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+@media (max-width: 700px) {
+  .header {
+    height: auto;
+    padding: 20px;
+  }
+
+  .header-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .texto-header {
+    text-align: center;
+    padding: 0;
+    margin-top: 20px;
+  }
+
+  .logo {
+    max-height: 900px;
+    width: auto;
+  }
+}
+
+.integrantes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.integrante {
+  background-color: var(--cinza-claro);
+  border: 2px solid var(--laranja);
+  border-radius: 14px;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.integrante:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+}
+
+.integrante img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 3px solid var(--laranja);
+  object-fit: cover;
+  background-color: var(--branco);
+}
+
+.integrante h3 {
+  color: var(--azul);
+  font-size: 1.1rem;
+  margin-top: 12px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.funcao {
+  color: var(--laranja);
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+.integrante p {
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Responsivo */
+@media (max-width: 700px) {
+  .integrante img {
+    width: 90px;
+    height: 90px;
+  }
+}
