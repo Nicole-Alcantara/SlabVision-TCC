@@ -1,7 +1,5 @@
-/* Importação de fontes estilizadas */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Quicksand:wght@400;500;600&display=swap');
 
-/* Cores da logo refinadas */
 :root {
   --azul: #002C5F;
   --laranja: #F47C00;
@@ -237,7 +235,6 @@ ul {
   line-height: 1.4;
 }
 
-/* Responsivo */
 @media (max-width: 700px) {
   .integrante img {
     width: 90px;

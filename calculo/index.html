@@ -1,68 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculadora de Treliças</title>
-  <link rel="stylesheet" href="style.css" />
+ 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      color: #222;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background-color: #0078d7;
+      color: white;
+      padding: 20px;
+    }
+    main {
+      margin-top: 30px;
+    }
+    button {
+      background-color: #0078d7;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 13px;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1>Calculadora de Treliças</h1>
-    <p>Adicione os cômodos e calcule as treliças necessárias 🏗️</p>
+    <p>Calcule o número de treliças necessárias para o seu telhado</p>
   </header>
 
   <main>
-    <section id="formulario">
-      <h2>Adicionar Cômodo</h2>
-      <form id="formTrelica">
-        <label for="comodo">Nome do cômodo:</label>
-        <input type="text" id="comodo" placeholder="Ex: Sala, Quarto..." required>
-
-        <label for="comprimento">Comprimento (m):</label>
-        <input type="number" id="comprimento" step="0.01" required>
-
-        <label for="largura">Largura (m):</label>
-        <input type="number" id="largura" step="0.01" required>
-
-        <label for="espacamento">Espaçamento entre treliças (cm):</label>
-        <input type="number" id="espacamento" step="0.01" required>
-
-        <button type="button" id="btnAdicionar">Adicionar Cômodo</button>
-      </form>
-    </section>
-
-    <section id="resultados">
-      <h2>Resultados</h2>
-      <table id="tabelaResultados">
-        <thead>
-          <tr>
-            <th>Cômodo</th>
-            <th>Comprimento (m)</th>
-            <th>Largura (m)</th>
-            <th>Espaçamento (m)</th>
-            <th>Treliças</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
-
-    <section id="resumo">
-      <h2>Resumo Agrupado</h2>
-      <pre id="textoResumo">Nenhum cálculo realizado ainda.</pre>
-    </section>
-
-    <div class="botoes">
-      <button onclick="mostrarResumo()">Atualizar Resumo</button>
-      <button onclick="gerarWord()">Gerar Documento Word</button>
-    </div>
+    <button onclick="iniciarCalculadora()">Iniciar Cálculo</button>
+    <button onclick="mostrarResumo()">Mostrar Resumo</button>
+    <button onclick="gerarWord()">Gerar Documento Word</button>
   </main>
 
   <footer>
     <p>🧮 Desenvolvido para estudo — cálculo simples de treliças</p>
   </footer>
 
-  <script src="script.js"></script>
-</body>
+<script src="script.js"></script>
+  </body>
 </html>
