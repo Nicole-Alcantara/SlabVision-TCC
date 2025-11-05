@@ -1,66 +1,80 @@
+const resultados = [];
 
+const form = document.getElementById("formTrelica");
+const tabelaBody = document.querySelector("#tabelaResultados tbody");
+const resumoTexto = document.getElementById("textoResumo");
 
-const resultados = []; // Array para guardar os resultados agrupados
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-// Função principal de cálculo
-function calcularTrelicas(comodo, comprimento, largura, espacamento) {
+  const comodo = document.getElementById("comodo").value.trim();
+  const comprimento = parseFloat(document.getElementById("comprimento").value);
+  const largura = parseFloat(document.getElementById("largura").value);
+  const espacamento = parseFloat(document.getElementById("espacamento").value) / 100; // cm → m
+
+  if (!comodo || isNaN(comprimento) || isNaN(largura)) {
+    alert("Por favor, preencha todos os campos corretamente.");
+    return;
+  }
+
   if (largura > 12) {
-    alert("⚠️ A largura máxima da treliça é 12 metros!");
+    alert("⚠️ A largura máxima é de 12 metros.");
     return;
   }
 
   const quantidade = Math.ceil(comprimento / espacamento) + 1;
-  const resultado = {
-    comodo,
-    comprimento,
-    largura,
-    espacamento,
-    quantidade
-  };
+  resultados.push({ comodo, comprimento, largura, espacamento: 30, quantidade });
 
-  resultados.push(resultado);
-  alert(`✅ ${comodo} adicionado: ${quantidade} treliças de ${largura}m.`);
+  adicionarLinhaTabela(comodo, comprimento, largura, 30, quantidade);
+  form.reset();
+  document.getElementById("espacamento").value = 30;
+});
+
+function adicionarLinhaTabela(comodo, comprimento, largura, espacamento, quantidade) {
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td>${comodo}</td>
+    <td>${comprimento}</td>
+    <td>${largura}</td>
+    <td>${espacamento}</td>
+    <td>${quantidade}</td>
+  `;
+  tabelaBody.appendChild(tr);
 }
 
-// Função para exibir o resumo agrupado
-function mostrarResumo() {
+document.getElementById("btnResumo").addEventListener("click", () => {
   if (resultados.length === 0) {
-    alert("Nenhum resultado salvo ainda!");
+    resumoTexto.textContent = "Nenhum cálculo realizado ainda.";
     return;
   }
 
-  let resumo = "📊 RESUMO DE TRELIÇAS\n\n";
-  const mapa = {}; // objeto para agrupar por tamanho
+  const mapa = {};
+  let texto = "RESUMO DE TRELIÇAS:\n\n";
 
   resultados.forEach(r => {
-    resumo += `• ${r.comodo}: ${r.quantidade} treliças de ${r.largura}m\n`;
+    texto += `• ${r.comodo}: ${r.quantidade} treliças de ${r.largura}m\n`;
     if (!mapa[r.largura]) mapa[r.largura] = 0;
     mapa[r.largura] += r.quantidade;
   });
 
-  resumo += "\n=== AGRUPAMENTO POR TAMANHO ===\n";
-  let totalGeral = 0;
-  for (const tamanho in mapa) {
-    resumo += `Treliças de ${tamanho}m: ${mapa[tamanho]} un.\n`;
-    totalGeral += mapa[tamanho];
+  texto += "\nAGRUPAMENTO POR TAMANHO:\n";
+  let total = 0;
+  for (const largura in mapa) {
+    texto += `Treliças de ${largura}m: ${mapa[largura]} un.\n`;
+    total += mapa[largura];
   }
+  texto += `\nTOTAL GERAL: ${total} treliças.`;
 
-  resumo += `\nTOTAL GERAL: ${totalGeral} treliças.\n`;
+  resumoTexto.textContent = texto;
+});
 
-  console.log(resumo);
-  alert("Resumo completo foi exibido no console (F12).");
-
-  return resumo;
-}
-
-// Função para gerar o documento Word (.docx)
-function gerarWord() {
+document.getElementById("btnExportar").addEventListener("click", () => {
   if (resultados.length === 0) {
-    alert("Nenhum cálculo para exportar!");
+    alert("Nenhum dado para exportar!");
     return;
   }
 
-  const resumo = mostrarResumo();
+  const resumo = resumoTexto.textContent;
   const conteudo = `
     <html xmlns:o='urn:schemas-microsoft-com:office:office' 
           xmlns:w='urn:schemas-microsoft-com:office:word' 
@@ -72,47 +86,11 @@ function gerarWord() {
     </body>
     </html>`;
 
-  const blob = new Blob(['\ufeff', conteudo], {
-    type: 'application/msword'
-  });
-
-  const url = URL.createObjectURL(blob);
+  const blob = new Blob(['\ufeff', conteudo], { type: 'application/msword' });
   const link = document.createElement('a');
-  link.href = url;
+  link.href = URL.createObjectURL(blob);
   link.download = 'Relatorio_Trelicas.doc';
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-  URL.revokeObjectURL(url);
-  alert("📄 Documento Word gerado com sucesso!");
-}
-
-// Função interativa (para testar no navegador)
-function iniciarCalculadora() {
-  let continuar = true;
-
-  while (continuar) {
-    const comodo = prompt("Nome do cômodo:");
-    const comprimento = parseFloat(prompt("Comprimento (m):"));
-    const largura = parseFloat(prompt("Largura (m):"));
-    const espacamento = parseFloat(prompt("Espaçamento entre treliças (m):"));
-
-    if (isNaN(comprimento) || isNaN(largura) || isNaN(espacamento)) {
-      alert("❌ Digite valores numéricos válidos.");
-      continue;
-    }
-
-    calcularTrelicas(comodo, comprimento, largura, espacamento);
-
-    const opcao = prompt("Deseja adicionar outro cômodo? (s/n):").toLowerCase();
-    if (opcao !== 's') continuar = false;
-  }
-
-  mostrarResumo();
-
-  const gerar = confirm("Deseja gerar o documento Word com os resultados?");
-  if (gerar) gerarWord();
-}
-
-// Chame esta função para começar:
-iniciarCalculadora();
+});
