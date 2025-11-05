@@ -8,11 +8,14 @@
 </head>
 <body>
   <main class="container">
+    <!-- Botão de Voltar (X) -->
+    <button id="btnVoltar" class="btn-voltar" title="Voltar">✕</button>
+
     <h1>Calculadora de Treliças</h1>
 
     <form id="formTrelica">
       <div class="campo">
-        <label for="comodo">Nome do cômodo:</label>
+        <label for="comodo">Nome da área:</label>
         <input type="text" id="comodo" required>
       </div>
 
@@ -63,7 +66,13 @@
     </div>
   </main>
 
+  <script>
+    // Redirecionar para a página de apresentação
+    document.getElementById("btnVoltar").addEventListener("click", () => {
+      window.location.href = "../apresentaçao/index.html";
+    });
+  </script>
+
   <script src="script.js"></script>
 </body>
 </html>
-
